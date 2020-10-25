@@ -12,7 +12,8 @@ logger = logging.getLogger('wordinator')
 logger.setLevel(logging.INFO)
 
 #Get List of PDFs
-PDF_LIST=next(os.walk("reminders/"))
+PDF_FOLDER_PATH = "reminders/"
+PDF_LIST=next(os.walk(PDF_FOLDER_PATH))
 ''' 
 Part #1 : Converting PDF to images 
 '''
@@ -26,7 +27,7 @@ for PDF in PDF_LIST[2]:
 		os.makedirs("temp/"+str(PDF_FILE))
 
 	# Store all the pages of the PDF in a variable 
-	pages = convert_from_path(PDF, 500) 
+	pages = convert_from_path(PDF_FOLDER_PATH+PDF, 500) 
 
 	# Counter to store images of each page of PDF to image 
 	image_counter = 1
