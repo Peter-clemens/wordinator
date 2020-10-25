@@ -27,7 +27,7 @@ for PDF in PDF_LIST[2]:
 		os.makedirs("temp/"+PDF_FILE)
 
 	# Store all the pages of the PDF in a variable 
-	pages = convert_from_path(PDF_FOLDER_PATH+PDF, 500) 
+	pages = convert_from_path(PDF_FOLDER_PATH+PDF, 500, fmt='jpeg',thread_count=4) 
 
 	# Counter to store images of each page of PDF to image 
 	image_counter = 1
@@ -77,6 +77,7 @@ for PDF in PDF_LIST[2]:
 		
 		# Recognize the text as string in image using pytesserct 
 		text = str(((pytesseract.image_to_string(Image.open(filename))))) 
+		Image.close()
 
 		# The recognized text is stored in variable text 
 		# Any string processing may be applied on text 
@@ -87,7 +88,7 @@ for PDF in PDF_LIST[2]:
 		# Eg: This is a sample text this word here GeeksF- 
 		# orGeeks is half on first line, remaining on next. 
 		# To remove this, we replace every '-\n' to ''. 
-		text = text.replace('-\n', '')	 
+		text = text.replace('-\n', '')
 
 		# Finally, write the processed text to the file. 
 		f.write(text) 
