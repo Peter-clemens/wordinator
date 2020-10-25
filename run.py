@@ -22,9 +22,9 @@ for PDF in PDF_LIST[2]:
 	logger.info('Converting '+ PDF + " to image")
 
 	#Get PDF Name
-	PDF_FILE=os.path.splitext(PDF)[0]
-	if not os.path.exists("temp/"+str(PDF_FILE)):
-		os.makedirs("temp/"+str(PDF_FILE))
+	PDF_FILE=str(os.path.splitext(PDF)[0])
+	if not os.path.exists("temp/"+PDF_FILE):
+		os.makedirs("temp/"+PDF_FILE)
 
 	# Store all the pages of the PDF in a variable 
 	pages = convert_from_path(PDF_FOLDER_PATH+PDF, 500) 
@@ -42,7 +42,7 @@ for PDF in PDF_LIST[2]:
 		# PDF page 3 -> page_3.jpg 
 		# .... 
 		# PDF page n -> page_n.jpg 
-		filename = "temp"+PDF_FILE+"/page_"+str(image_counter)+".jpg"
+		filename = "temp/"+PDF_FILE+"/page_"+str(image_counter)+".jpg"
 		
 		# Save the image of the page in system 
 		page.save(filename, 'JPEG') 
@@ -73,7 +73,7 @@ for PDF in PDF_LIST[2]:
 		# page_2.jpg 
 		# .... 
 		# page_n.jpg 
-		filename = "temp"+PDF_FILE+"/page_"+str(i)+".jpg"
+		filename = "temp/"+PDF_FILE+"/page_"+str(i)+".jpg"
 		
 		# Recognize the text as string in image using pytesserct 
 		text = str(((pytesseract.image_to_string(Image.open(filename))))) 
