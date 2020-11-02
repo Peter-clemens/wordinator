@@ -74,10 +74,13 @@ for PDF in PDF_LIST[2]:
 		# .... 
 		# page_n.jpg 
 		filename = "temp/"+PDF_FILE+"/page_"+str(i)+".jpg"
+		imageFromFile=Image.open(filename)
 		
 		# Recognize the text as string in image using pytesserct 
-		text = str(((pytesseract.image_to_string(Image.open(filename))))) 
-		Image.close()
+		text = str(((pytesseract.image_to_string(imageFromFile)))) 
+		
+		#Release after usage
+		imageFromFile.close()
 
 		# The recognized text is stored in variable text 
 		# Any string processing may be applied on text 
